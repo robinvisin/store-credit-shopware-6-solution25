@@ -10,10 +10,6 @@ class StoreCreditHistoryEntity extends Entity
 {
     use EntityIdTrait;
 
-    /**
-     * @var string
-     */
-    protected $id;
 
     /**
      * @var string
