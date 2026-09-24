@@ -41,12 +41,12 @@ class StoreCreditEntity extends Entity
     /**
      * @var \DateTimeInterface|null
      */
-    protected $createdAt;
+    protected ?\DateTimeInterface $createdAt = null;
 
     /**
      * @var \DateTimeInterface|null
      */
-    protected $updatedAt;
+    protected ?\DateTimeInterface $updatedAt = null;
 
     public function getId(): string
     {

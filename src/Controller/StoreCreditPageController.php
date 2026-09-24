@@ -40,7 +40,7 @@ class StoreCreditPageController extends StorefrontController
         $criteria->addFilter(new EqualsFilter('customerId', $customerId));
         $storeCreditResult = $this->storeCreditRepository->search($criteria, $context->getContext());
         /** @var StoreCreditEntity $storeCredit */
-        $storeCredit       = $storeCreditResult->first();
+        $storeCredit       = $storeCreditResult->getEntities()->first();
 
         $page  = max(1, (int) $request->query->get('page', 1));
         $limit = 10;
@@ -53,7 +53,7 @@ class StoreCreditPageController extends StorefrontController
         $historyCriteria->addFilter(new EqualsFilter('storeCreditId', $storeCredit?->getId()));
 
         $storeCreditsHistoryResult = $this->storeCreditHistoryRepository->search($historyCriteria, $context->getContext());
-        $storeCreditsHistory       = $storeCreditsHistoryResult->getElements();
+        $storeCreditsHistory       = $storeCreditsHistoryResult->getEntities()->getElements();
         $totalHistory              = $storeCreditsHistoryResult->getTotal();
         $totalPages                = $limit > 0 ? (int) ceil($totalHistory / $limit) : 1;
 

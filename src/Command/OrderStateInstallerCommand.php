@@ -10,7 +10,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-#[AsCommand(name: 'store-credit:install-order-state', name: 'store-credit:install-order-state', description: 'Installs the store credit order state and transitions.')]
+#[AsCommand(name: 'store-credit:install-order-state', description: 'Installs the store credit order state and transitions.')]
 
 class OrderStateInstallerCommand extends Command
 {

@@ -121,7 +121,7 @@ class StoreCreditApplyController extends StorefrontController
         $criteria = new Criteria();
         $criteria->addFilter(new EqualsFilter('customerId', $customerId));
         $result = $this->storeCreditRepository->search($criteria, $context);
-        $storeCreditEntity = $result->first();
+        $storeCreditEntity = $result->getEntities()->first();
 
         return $storeCreditEntity ? (float)$storeCreditEntity->get('balance') : 0.0;
     }

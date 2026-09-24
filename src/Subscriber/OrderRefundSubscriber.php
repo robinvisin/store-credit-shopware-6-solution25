@@ -63,7 +63,7 @@ class OrderRefundSubscriber implements EventSubscriberInterface
         $criteria->addAssociation('transactions.stateMachineState');
 
         /** @var OrderEntity $order */
-        $order = $this->orderRepository->search($criteria, $context)->last();
+        $order = $this->orderRepository->search($criteria, $context)->getEntities()->last();
 
         return $order;
     }
@@ -79,7 +79,7 @@ class OrderRefundSubscriber implements EventSubscriberInterface
         $returnCriteria->addAssociation('lineItems');
 
         /** @var OrderEntity|null $orderReturn */
-        $orderReturn = $this->orderReturnRepository->search($returnCriteria, $context)->last();
+        $orderReturn = $this->orderReturnRepository->search($returnCriteria, $context)->getEntities()->last();
 
         return $orderReturn;
     }

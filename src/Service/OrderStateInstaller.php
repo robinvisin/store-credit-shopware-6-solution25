@@ -94,7 +94,7 @@ class OrderStateInstaller
         /** @var StateMachineEntity $stateMachine */
         $stateMachine = $stateMachineRepository
             ->search($criteria, $context)
-            ->first();
+            ->getEntities()->first();
         /* @phpstan-ignore-next-line */
         if (!$stateMachine) {
             throw new \RuntimeException(
@@ -119,7 +119,7 @@ class OrderStateInstaller
         /** @var StateMachineEntity $state */
         $state = $this->stateMachineStateRepository
             ->search($criteria, $context)
-            ->first();
+            ->getEntities()->first();
         /* @phpstan-ignore-next-line */
         if (!$state) {
             throw new \RuntimeException(
@@ -164,7 +164,7 @@ class OrderStateInstaller
         $criteria->addFilter(new EqualsAnyFilter("actionName", $actionNames)); // EqualsFilter accepts array for "IN"
         $transitions = $this->stateMachineTransitionRepository->search($criteria, $context);
 
-        $transitionIds = $transitions->getIds();
+        $transitionIds = $transitions->getEntities()->getIds();
 
         if (!empty($transitionIds)) {
             $deleteData = array_map(fn($id) => ["id" => $id], $transitionIds);
@@ -184,7 +184,7 @@ class OrderStateInstaller
             $criteria,
             $context
         );
-        $stateIds = $states->getIds();
+        $stateIds = $states->getEntities()->getIds();
 
         $this->removeStateMachineHistoryReferences($stateIds, $context);
 
@@ -204,7 +204,7 @@ class OrderStateInstaller
         );
 
         $historyEntries = $this->stateMachineHistoryRepository->search($criteria, $context);
-        $historyIds = $historyEntries->getIds();
+        $historyIds = $historyEntries->getEntities()->getIds();
 
         if (!empty($historyIds)) {
             $deleteData = array_map(fn($id) => ['id' => $id], $historyIds);
@@ -216,7 +216,7 @@ class OrderStateInstaller
         $criteria = new Criteria();
         $criteria->addFilter(new EqualsFilter("technicalName", self::NEW_STATE_TECHNICAL_NAME));
         $criteria->addFilter(new EqualsFilter("stateMachineId", $stateMachineId));
-        $state = $this->stateMachineStateRepository->search($criteria, $context)->first();
+        $state = $this->stateMachineStateRepository->search($criteria, $context)->getEntities()->first();
         return $state !== null;
     }
 
@@ -225,7 +225,7 @@ class OrderStateInstaller
         $criteria = new Criteria();
         $criteria->addFilter(new EqualsFilter("stateMachineId", $transitions[0]['stateMachineId']));
         $existingTransitions = $this->stateMachineTransitionRepository->search($criteria, $context);
-        $elements = $existingTransitions->getElements();
+        $elements = $existingTransitions->getEntities()->getElements();
         /** @var StateMachineTransitionEntity[] $elements */
         return array_map(
             fn (StateMachineTransitionEntity $transition) => $transition->getActionName(), //this is line 215

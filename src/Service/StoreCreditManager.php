@@ -219,7 +219,7 @@ class StoreCreditManager
         $criteria->addFilter(new EqualsFilter('customerId', $customerId));
         $result = $this->storeCreditRepository->search($criteria, $context);
 
-        $storeCreditEntity = $result->first();
+        $storeCreditEntity = $result->getEntities()->first();
         $entity = $storeCreditEntity instanceof StoreCreditEntity ? $storeCreditEntity : null;
 
         $this->entityCache[$customerId] = $entity;
