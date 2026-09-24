@@ -1,8 +1,8 @@
 <template>
     <div>
-        <sw-card title="Select Customer">
-            <sw-text-field
-                v-model:value="searchTerm"
+        <mt-card title="Select Customer">
+            <mt-text-field
+                v-model="searchTerm"
                 placeholder="Search for customers..."
                 @input="onSearch"
             />
@@ -34,6 +34,6 @@
                 @pageChange="onPageChange"
             >
        </sw-pagination>
-        </sw-card>
+        </mt-card>
     </div>
 </template>
