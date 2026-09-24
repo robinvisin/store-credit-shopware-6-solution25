@@ -10,21 +10,14 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-#[AsCommand(name: 'store-credit:install-order-state')]
+#[AsCommand(name: 'store-credit:install-order-state', name: 'store-credit:install-order-state', description: 'Installs the store credit order state and transitions.')]
 
 class OrderStateInstallerCommand extends Command
 {
-    protected static string $defaultName = 'store-credit:install-order-state';
-
     public function __construct(
         private readonly OrderStateInstaller $orderStateInstaller
     ) {
         parent::__construct();
-    }
-
-    protected function configure(): void
-    {
-        $this->setDescription('Installs the store credit order state and transitions.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

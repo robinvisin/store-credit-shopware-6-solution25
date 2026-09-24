@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route(defaults: ['_routeScope' => ['api'], "_loginRequired" => true])]
+#[\Symfony\Component\Routing\Attribute\Route(defaults: ['_routeScope' => ['api'], "_loginRequired" => true])]
 class StoreCreditController
 {
     private StoreCreditManager $storeCreditManager;
@@ -25,7 +25,7 @@ class StoreCreditController
         $this->logger = $logger;
     }
 
-    #[Route(path: '/api/store-credit/add', name: 'api.store.credit.add', methods: ['POST'], defaults: ['_acl' => ['store_credit:create', 'store_credit:update']])]
+    #[\Symfony\Component\Routing\Attribute\Route(path: '/api/store-credit/add', name: 'api.store.credit.add', methods: ['POST'], defaults: ['_acl' => ['store_credit:create', 'store_credit:update']])]
     public function addCredit(Request $request, Context $context): JsonResponse
     {
         $customerId = $request->get('customerId');
@@ -55,7 +55,7 @@ class StoreCreditController
         }
     }
 
-    #[Route(path: '/api/store-credit/deduct', name: 'api.store.credit.deduct', methods: ['POST'], defaults: ['_acl' => ['store_credit:create', 'store_credit:update']])]
+    #[\Symfony\Component\Routing\Attribute\Route(path: '/api/store-credit/deduct', name: 'api.store.credit.deduct', methods: ['POST'], defaults: ['_acl' => ['store_credit:create', 'store_credit:update']])]
     public function deductCredit(Request $request, Context $context): JsonResponse
     {
         $customerId = $request->get('customerId');
@@ -82,7 +82,7 @@ class StoreCreditController
         }
     }
 
-    #[Route(path: '/api/store-credit/balance', name: 'api.store-credit.balance', methods: ['GET'], defaults: ['_acl' => ['store_credit:read']])]
+    #[\Symfony\Component\Routing\Attribute\Route(path: '/api/store-credit/balance', name: 'api.store-credit.balance', methods: ['GET'], defaults: ['_acl' => ['store_credit:read']])]
     public function getCreditBalance(Request $request, Context $context): JsonResponse
     {
         $customerId = $request->get('customerId');

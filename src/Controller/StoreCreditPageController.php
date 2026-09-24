@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Shopware\Storefront\Controller\StorefrontController;
 
-#[Route(defaults: ['_routeScope' => ['storefront']])]
+#[\Symfony\Component\Routing\Attribute\Route(defaults: ['_routeScope' => ['storefront']])]
 class StoreCreditPageController extends StorefrontController
 {
     private EntityRepository $storeCreditRepository;
@@ -27,7 +27,7 @@ class StoreCreditPageController extends StorefrontController
         $this->storeCreditHistoryRepository = $storeCreditHistoryRepository;
     }
 
-    #[Route(path: '/account/store-credit', name: 'frontend.account.store-credit.page', methods: ['GET'])]
+    #[\Symfony\Component\Routing\Attribute\Route(path: '/account/store-credit', name: 'frontend.account.store-credit.page', methods: ['GET'])]
     public function index(Request $request, SalesChannelContext $context): Response
     {
         $customerId = $context->getCustomer()?->getId();

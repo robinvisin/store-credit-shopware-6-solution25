@@ -1,5 +1,5 @@
 {% block sw_customer_detail_content_tab_after %}
-{% parent %}
+{% parent() %}
 
 <sw-tabs-item
     v-if="storeCreditsRoute"
@@ -10,4 +10,3 @@
     {{ $tc('store-credits.customer.tabTitle') }}
 </sw-tabs-item>
 {% endblock %}
-
