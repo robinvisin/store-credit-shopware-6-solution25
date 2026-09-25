@@ -95,8 +95,10 @@ class StoreCreditController
                 'balance'    => $balance['balanceAmount'],
                 'currencyId' => $balance['balanceCurrencyId'],
             ]);
-        } catch (\InvalidArgumentException | StoreCreditNotFoundException $e) {
+        } catch (\InvalidArgumentException $e) {
             return new JsonResponse(['success' => false, 'message' => $e->getMessage()], 400);
+        /* @phpstan-ignore-next-line catch.neverThrown — defensive: the DAL can fail at
+           runtime (connection, deadlock) in ways static analysis does not model. */
         } catch (\Exception $e) {
             $this->logger->error('Failed to retrieve store credit balance', [
                 'customerId' => $customerId,

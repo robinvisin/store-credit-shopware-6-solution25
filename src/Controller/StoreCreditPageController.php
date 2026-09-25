@@ -55,7 +55,7 @@ class StoreCreditPageController extends StorefrontController
         $storeCreditsHistoryResult = $this->storeCreditHistoryRepository->search($historyCriteria, $context->getContext());
         $storeCreditsHistory       = $storeCreditsHistoryResult->getEntities()->getElements();
         $totalHistory              = $storeCreditsHistoryResult->getTotal();
-        $totalPages                = $limit > 0 ? (int) ceil($totalHistory / $limit) : 1;
+        $totalPages                = (int) ceil($totalHistory / $limit);
 
         $customer = $context->getCustomer();
 
